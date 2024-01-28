@@ -1,37 +1,22 @@
-﻿using System;
-
-namespace Locobuzz
+﻿namespace Address_Book
 {
-    class Contact
-    {
-        public string firstName;
-        public string lastName;
-        public string address;
-        public string city;
-        public string state;
-        public string zip;
-        public string phoneNumber;
-        public string email;
-
-        public Contact(string firstName, string lastName, string address, string city, string state, string zip, string phoneNumber, string email)
-        {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.address = address;
-            this.city = city;
-            this.state = state;
-            this.zip = zip;
-            this.phoneNumber = phoneNumber;
-            this.email = email;
-        }
-    }
-
     class Program
     {
-        public static void Main(String[] args)
+        public static void Main(string[] args)
         {
+            // Create an instance of the Contact class
+            Contact obj = new Contact("Anand", "Kunal", "GH-168", "ranchi", "jharkhand", "834004", "9934311972", "anandkunalmishra@gmail.com");
+
+            // Accessing the properties using getters
             Console.WriteLine("Welcome to the Address book");
+            Console.WriteLine($"First Name: {obj.FirstName}");
+            Console.WriteLine($"Last Name: {obj.LastName}");
+            Console.WriteLine($"Address: {obj.Address}");
+            Console.WriteLine($"City: {obj.City}");
+            Console.WriteLine($"State: {obj.State}");
+            Console.WriteLine($"Pincode: {obj.Pincode}");
+            Console.WriteLine($"Phone Number: {obj.PhoneNumber}");
+            Console.WriteLine($"Email: {obj.Email}");
         }
     }
-
 }
