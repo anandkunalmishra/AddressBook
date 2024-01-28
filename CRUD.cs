@@ -58,16 +58,16 @@ namespace Address_Book
 		}
 
 
-		public void retrieve(string firstName)
-		{
-			Console.WriteLine("What is the firstName of the Person");
-			Console.WriteLine(data[firstName]);
-		}
+		//public void retrieve(string firstName)
+		//{
+		//	Console.WriteLine("What is the firstName of the Person");
+		//	Console.WriteLine(data[firstName]);
+		//}
 
-		public void update(string firstName)
-		{
+		//public void update(string firstName)
+		//{
 
-		}
+		//}
 	}
 }
 	

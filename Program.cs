@@ -68,20 +68,20 @@ namespace Address_Book
             operation.create();
         }
 
-        static void RetrieveContact(Database addressbook)
-        {
-            operation.retrieve();
-        }
+        //static void RetrieveContact(Database addressbook)
+        //{
+        //    operation.retrieve();
+        //}
 
-        static void DisplayAllContacts(Database addressbook)
-        {
+        //static void DisplayAllContacts(Database addressbook)
+        //{
 
-        }
+        //}
 
-        static void UpdateContact(Database addressbook)
-        {
+        //static void UpdateContact(Database addressbook)
+        //{
 
-        }
+        //}
 
     }
 }
