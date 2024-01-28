@@ -2,21 +2,59 @@
 {
     class Program
     {
+
         public static void Main(string[] args)
         {
-            // Create an instance of the Contact class
-            Contact obj = new Contact("Anand", "Kunal", "GH-168", "ranchi", "jharkhand", "834004", "9934311972", "anandkunalmishra@gmail.com");
+            Database addressBook = new Database();
 
-            // Accessing the properties using getters
-            Console.WriteLine("Welcome to the Address book");
-            Console.WriteLine($"First Name: {obj.FirstName}");
-            Console.WriteLine($"Last Name: {obj.LastName}");
-            Console.WriteLine($"Address: {obj.Address}");
-            Console.WriteLine($"City: {obj.City}");
-            Console.WriteLine($"State: {obj.State}");
-            Console.WriteLine($"Pincode: {obj.Pincode}");
-            Console.WriteLine($"Phone Number: {obj.PhoneNumber}");
-            Console.WriteLine($"Email: {obj.Email}");
+            while (true)
+            {
+                Console.WriteLine("Chosse an operation");
+                Console.WriteLine("1. Adding a contact");
+                Console.WriteLine("2. Reading a contact");
+                Console.WriteLine("3. Display all contacts");
+                Console.WriteLine("4. Update a contact");
+                Console.WriteLine("5. Exit");
+
+                int choice;
+                if (!int.TryParse(Console.ReadLine(), out choice))
+                {
+                    Console.WriteLine("Invalid choice. Please enter a number.");
+                    continue;
+                }
+
+                switch (choice)
+                {
+                    case 1:
+                        AddContact(addressBook);
+                        break;
+                    case 2:
+                        RetrieveContact(addressBook);
+                        break;
+                    case 3:
+                        DisplayAllContacts(addressBook);
+                        break;
+                    case 4:
+                        UpdateContact(addressBook);
+                        break;
+                }
+            }
+        }
+        static void AddContact(Database addressbook)
+        {
+
+        }
+        static void RetrieveContact(Database addressbook)
+        {
+
+        }
+        static void DisplayAllContacts(Database addressbook)
+        {
+
+        }
+        static void UpdateContact(Database addressbook)
+        {
+
         }
     }
 }
