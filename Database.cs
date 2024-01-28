@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace Address_Book
 {
 	public class Database
 	{
-		Dictionary<string, Contact> dict;
+		public Dictionary<string, Contact> dict;
 
 		public Database()
 		{

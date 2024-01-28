@@ -1,19 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace Address_Book
 {
 	public class CRUD
 	{
-		public void create()
-		{
-			private string firstName;
-			private string lastName;
-			private string address;
-			private string city;
-			private string state;
-			private string zip;
-			private string phoneNumber;
-			private string email;
+        private string firstName;
+        private string lastName;
+        private string address;
+        private string city;
+        private string state;
+        private string zip;
+        private string phoneNumber;
+        private string email;
 
+        Database data = new Database();
+
+        public void create()
+		{
 			Console.WriteLine("Hello this is Add window ...");
 
 			//Taking first name of the contact from the user
@@ -50,21 +53,22 @@ namespace Address_Book
 
 			Contact newObj = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
 
-			Database data = new Database();
-			data.dict.Add(newObj.firstName,newObj);
+			
+			data.dict.Add(newObj.FirstName, newObj);
 		}
-		//public void read()
-		//{
 
-		//}
-		//public void update()
-		//{
 
-		//}
-		//public void delete()
-		//{
+		public void retrieve(string firstName)
+		{
+			Console.WriteLine("What is the firstName of the Person");
+			Console.WriteLine(data[firstName]);
+		}
 
-		//}
+		public void update(string firstName)
+		{
+
+		}
 	}
 }
+	
 
