@@ -13,7 +13,7 @@ namespace Address_Book
                 Console.WriteLine("Chosse an operation");
                 Console.WriteLine("1. Adding a contact");
                 Console.WriteLine("2. Reading a contact");
-                Console.WriteLine("3. Display all contacts");
+                Console.WriteLine("3. Delete a contact");
                 Console.WriteLine("4. Update a contact");
                 Console.WriteLine("5. Exit");
 
@@ -46,7 +46,7 @@ namespace Address_Book
                         RetrieveContact(addressBook);
                         break;
                     case 3:
-                        DisplayAllContacts(addressBook);
+                        DeleteContact(addressBook);
                         break;
                     case 4:
                         UpdateContact(addressBook);
@@ -70,20 +70,26 @@ namespace Address_Book
 
         static void RetrieveContact(Database addressbook)
         {
+            Console.Clear();
             Console.WriteLine("Write the firstName of the person");
             string firstName = Console.ReadLine();
             operation.retrieve(firstName);
         }
 
-        static void DisplayAllContacts(Database addressbook)
-        {
-
-        }
-
         static void UpdateContact(Database addressbook)
         {
-
+            Console.Clear();
+            Console.WriteLine("\nWrite the firstName");
+            string firstName = Console.ReadLine();
+            operation.update(firstName);
         }
 
+        static void DeleteContact(Database addressbok)
+        {
+            Console.Clear();
+            Console.WriteLine("\nWrite the firstName");
+            string firstName = Console.ReadLine();
+            operation.delete(firstName);
+        }
     }
 }
