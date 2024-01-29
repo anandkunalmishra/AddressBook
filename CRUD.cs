@@ -148,6 +148,18 @@
 				}
             }
 		}
+		public void delete(string firstName)
+		{
+			Console.Clear();
+			if (data.dict.ContainsKey(firstName){
+				data.dict.Remove(firstName);
+				Console.WriteLine($"Contact with name {firstName} successfully deleted");
+			}
+			else
+			{
+				Console.WriteLine($"Contact with firstName {firstName} is not there");
+			}
+		}
 	}
 }
 	
