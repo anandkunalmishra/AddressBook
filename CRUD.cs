@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-namespace Address_Book
+﻿namespace Address_Book
 {
 	public class CRUD
 	{
@@ -84,10 +82,72 @@ namespace Address_Book
 			}
 		}
 
-		//public void update(string firstName)
-		//{
+		public void update(string firstName)
+		{
+			Console.Clear();
+			Contact contact = data.dict[firstName];
+			while (true)
+			{
+				Console.Clear();
+                Console.WriteLine("Choose the option you want to choose");
+                Console.WriteLine("1. First Name");
+                Console.WriteLine("2. Last Name");
+                Console.WriteLine("3. Address");
+                Console.WriteLine("4. City");
+                Console.WriteLine("5. State");
+                Console.WriteLine("6. Pincode");
+                Console.WriteLine("7. Phone Number");
+                Console.WriteLine("8. Email");
+				Console.WriteLine("9. EXIT");
 
-		//}
+                int choice;
+
+
+                if (!int.TryParse(Console.ReadLine(), out choice))
+                {
+                    Console.WriteLine("Invalid choice. Please enter a number.");
+                    continue;
+                }
+
+				switch (choice)
+				{
+					case 1:
+						Console.WriteLine("\nWhat first Name you want to change to");
+						contact.FirstName = Console.ReadLine();
+						break;
+					case 2:
+						Console.WriteLine("\nWhat Last name you want to change to");
+						contact.LastName = Console.ReadLine();
+						break;
+					case 3:
+						Console.WriteLine("\nWrite Address you want to change to");
+						contact.Address = Console.ReadLine();
+						break;
+					case 4:
+						Console.WriteLine("\nWrite the city name you want to change to ");
+						contact.City = Console.ReadLine();
+						break;
+					case 5:
+						Console.WriteLine("\nWrite the state name you want to change to");
+						contact.State = Console.ReadLine();
+						break;
+					case 6:
+						Console.WriteLine("\nWrite the Phone Number you want to change to");
+						contact.PhoneNumber = Console.ReadLine();
+						break;
+					case 7:
+						Console.WriteLine("\nWrite the Email you want to change to");
+						contact.Email = Console.ReadLine();
+						break;
+					case 8:
+						Environment.Exit(0);
+						break;
+					default:
+						Console.WriteLine("\nInvalid Choice!: Choose from 1-8");
+						break;
+				}
+            }
+		}
 	}
 }
 	
