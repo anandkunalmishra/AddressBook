@@ -17,6 +17,7 @@ namespace Address_Book
 
         public void create()
 		{
+			Console.Clear();
 			Console.WriteLine("Hello this is Add window ...");
 
 			//Taking first name of the contact from the user
@@ -55,14 +56,33 @@ namespace Address_Book
 
 			
 			data.dict.Add(newObj.FirstName, newObj);
+
+			Console.Clear();
+			Console.WriteLine("Contact successfully saved");
 		}
 
 
-		//public void retrieve(string firstName)
-		//{
-		//	Console.WriteLine("What is the firstName of the Person");
-		//	Console.WriteLine(data[firstName]);
-		//}
+		public void retrieve(string firstName)
+		{
+			Console.Clear();
+			if (data.dict.ContainsKey(firstName))
+			{
+				Console.WriteLine("Contact with First Name Found!\n");
+				Contact contact = data.dict[firstName];
+				Console.WriteLine($"First Name: {contact.FirstName}");
+				Console.WriteLine($"Last Name: {contact.LastName}");
+				Console.WriteLine($"Address: {contact.Address}");
+				Console.WriteLine($"City: {contact.City}");
+				Console.WriteLine($"State: {contact.State}");
+				Console.WriteLine($"Pincode: {contact.Pincode}");
+				Console.WriteLine($"Phone Number: {contact.PhoneNumber}");
+				Console.WriteLine($"Email: {contact.Email}");
+			}
+			else
+			{
+				Console.WriteLine($"Contact with firstName {firstName} not Found");
+			}
+		}
 
 		//public void update(string firstName)
 		//{
