@@ -8,7 +8,8 @@ namespace Address_Book
         {
             Database addressBook = new Database();
 
-            while (true)
+            int flag = 1;
+            while (flag == 1)
             {
                 Console.WriteLine("Chosse an operation");
                 Console.WriteLine("1. Adding a contact");
@@ -52,7 +53,7 @@ namespace Address_Book
                         UpdateContact(addressBook);
                         break;
                     case 5:
-                        Environment.Exit(0);
+                        flag = 0;
                         break;
                     case 6:
                         Console.WriteLine("Invalid choice! Please enter number between 1 and 5");
@@ -91,5 +92,15 @@ namespace Address_Book
             string firstName = Console.ReadLine();
             operation.delete(firstName);
         }
+
+        //public static void Main(String[] args)
+        //{
+        //    test obj = new test();
+        //    int a = 12;
+        //    int b = 13;
+        //    obj.swap(ref a, ref b);
+        //    Console.WriteLine(a);
+        //    Console.WriteLine(b);
+        //}
     }
 }

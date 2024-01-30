@@ -2,18 +2,18 @@
 {
 	public class CRUD
 	{
-        private string firstName;
-        private string lastName;
-        private string address;
-        private string city;
-        private string state;
-        private string zip;
-        private string phoneNumber;
-        private string email;
+		private string firstName;
+		private string lastName;
+		private string address;
+		private string city;
+		private string state;
+		private string zip;
+		private string phoneNumber;
+		private string email;
 
-        Database data = new Database();
+		Database data = new Database();
 
-        public void create()
+		public void create()
 		{
 			Console.Clear();
 			Console.WriteLine("Hello this is Add window ...");
@@ -52,7 +52,7 @@
 
 			Contact newObj = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
 
-			
+
 			data.dict.Add(newObj.FirstName, newObj);
 
 			Console.Clear();
@@ -86,28 +86,29 @@
 		{
 			Console.Clear();
 			Contact contact = data.dict[firstName];
-			while (true)
+			int flag = 1;
+			while (flag==1)
 			{
 				Console.Clear();
-                Console.WriteLine("Choose the option you want to choose");
-                Console.WriteLine("1. First Name");
-                Console.WriteLine("2. Last Name");
-                Console.WriteLine("3. Address");
-                Console.WriteLine("4. City");
-                Console.WriteLine("5. State");
-                Console.WriteLine("6. Pincode");
-                Console.WriteLine("7. Phone Number");
-                Console.WriteLine("8. Email");
+				Console.WriteLine("Choose the option you want to choose");
+				Console.WriteLine("1. First Name");
+				Console.WriteLine("2. Last Name");
+				Console.WriteLine("3. Address");
+				Console.WriteLine("4. City");
+				Console.WriteLine("5. State");
+				Console.WriteLine("6. Pincode");
+				Console.WriteLine("7. Phone Number");
+				Console.WriteLine("8. Email");
 				Console.WriteLine("9. EXIT");
 
-                int choice;
+				int choice;
 
 
-                if (!int.TryParse(Console.ReadLine(), out choice))
-                {
-                    Console.WriteLine("Invalid choice. Please enter a number.");
-                    continue;
-                }
+				if (!int.TryParse(Console.ReadLine(), out choice))
+				{
+					Console.WriteLine("Invalid choice. Please enter a number.");
+					continue;
+				}
 
 				switch (choice)
 				{
@@ -140,27 +141,28 @@
 						contact.Email = Console.ReadLine();
 						break;
 					case 8:
-						Environment.Exit(0);
+						flag = 0;
 						break;
 					default:
 						Console.WriteLine("\nInvalid Choice!: Choose from 1-8");
 						break;
 				}
+			}
+		}
+        public void delete(string firstName)
+        {
+            Console.Clear();
+            if (data.dict.ContainsKey(firstName))
+            {
+                data.dict.Remove(firstName);
+                Console.WriteLine($"Contact with name {firstName} successfully deleted");
             }
-		}
-		public void delete(string firstName)
-		{
-			Console.Clear();
-			if (data.dict.ContainsKey(firstName){
-				data.dict.Remove(firstName);
-				Console.WriteLine($"Contact with name {firstName} successfully deleted");
-			}
-			else
-			{
-				Console.WriteLine($"Contact with firstName {firstName} is not there");
-			}
-		}
-	}
+            else
+            {
+                Console.WriteLine($"Contact with firstName {firstName} is not there");
+            }
+        }
+    }
 }
-	
+
 
