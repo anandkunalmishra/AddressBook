@@ -21,6 +21,11 @@
 			//Taking first name of the contact from the user
 			Console.WriteLine("Write First Name");
 			firstName = Console.ReadLine();
+			if (data.dict.ContainsKey(firstName))
+			{
+				Console.WriteLine("User Already exist please enter Again");
+				return;
+			}
 
 			//Taking last name of contact from the user.
 			Console.WriteLine("Write Last Name");

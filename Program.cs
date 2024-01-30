@@ -92,15 +92,5 @@ namespace Address_Book
             string firstName = Console.ReadLine();
             operation.delete(firstName);
         }
-
-        //public static void Main(String[] args)
-        //{
-        //    test obj = new test();
-        //    int a = 12;
-        //    int b = 13;
-        //    obj.swap(ref a, ref b);
-        //    Console.WriteLine(a);
-        //    Console.WriteLine(b);
-        //}
     }
 }
