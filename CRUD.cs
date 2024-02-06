@@ -1,17 +1,21 @@
-﻿namespace Address_Book
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace Address_Book
 {
 	public class CRUD
 	{
-		private string firstName;
-		private string lastName;
-		private string address;
-		private string city;
-		private string state;
-		private string zip;
-		private string phoneNumber;
-		private string email;
+		private string firstName ="";
+		private string lastName = "";
+		private string address = "";
+		private string city = "";
+		private string state = "";
+		private string zip = "";
+		private string phoneNumber = "";
+		private string email = "";
 
 		Database data = new Database();
+
+		Validator validator = new Validator();
 
 		public void create()
 		{
@@ -19,41 +23,95 @@
 			Console.WriteLine("Hello this is Add window ...");
 
 			//Taking first name of the contact from the user
-			Console.WriteLine("Write First Name");
-			firstName = Console.ReadLine();
+			int flag = 1;
+			while (!validator.isValidName(firstName) && flag == 1)
+			{
+				Console.WriteLine("Write First Name");
+				firstName = Console.ReadLine();
+				if (!validator.isValidName(firstName))
+				{
+					Console.WriteLine("\nEnter name only where first letter should be in Capital and Enter only Letters");
+				}
+			}
+			//checking for the unique name if the name already exists or what
 			if (data.dict.ContainsKey(firstName))
 			{
 				Console.WriteLine("User Already exist please enter Again");
-				return;
+			}
+			else
+			{
+				flag = 0;
 			}
 
 			//Taking last name of contact from the user.
-			Console.WriteLine("Write Last Name");
-			lastName = Console.ReadLine();
+			while (!validator.isValidName(lastName))
+			{
+				Console.WriteLine("Write Last Name");
+				lastName = Console.ReadLine();
+                if (!validator.isValidName(lastName))
+                {
+                    Console.WriteLine("\nEnter name only where first letter should be in Capital");
+                }
+            }
 
 			//Taking address of the contact_person from user. 
 			Console.WriteLine("Write address of the person");
 			address = Console.ReadLine();
 
 			//Taking city of the Contact person from user.
-			Console.WriteLine("Write city of the Contact person");
-			city = Console.ReadLine();
+			while (!validator.isValidName(city))
+			{
+				Console.WriteLine("Write city of the Contact person");
+				city = Console.ReadLine();
+                if (!validator.isValidName(city))
+                {
+                    Console.WriteLine("\nEnter name only where first letter should be in Capital");
+                }
+            }
 
 			//Taking state name of the person from user.
-			Console.WriteLine("Write state of the person");
-			state = Console.ReadLine();
+			while (!validator.isValidName(state))
+			{
+				Console.WriteLine("Write state of the person");
+				state = Console.ReadLine();
+                if (!validator.isValidName(state))
+                {
+                    Console.WriteLine("\nEnter name only where first letter should be in Capital");
+                }
+            }
 
 			//Taking pincode of the person from user.
-			Console.WriteLine("Write pincode of the person");
-			zip = Console.ReadLine();
+			while (!validator.isValidZipCode(zip))
+			{
+				Console.WriteLine("Write pincode of the person");
+				zip = Console.ReadLine();
+                if (!validator.isValidZipCode(zip))
+                {
+                    Console.WriteLine("\nEnter number only as first digit can't be zero and length should be of six digit");
+                }
+            }
 
 			//Taking phoneNumber of the person from user.
-			Console.WriteLine("Write phoneNumber of the person");
-			phoneNumber = Console.ReadLine();
+			while (!validator.isValidPhoneNumber(phoneNumber))
+			{
+				Console.WriteLine("Write phoneNumber of the person");
+				phoneNumber = Console.ReadLine();
+				if (!validator.isValidPhoneNumber(phoneNumber))
+				{
+					Console.WriteLine("\nNumber should start with [6-9] and must be of length 10");
+				}
+			}
 
 			//Taking email of the person from user.
-			Console.WriteLine("Write email of the person");
-			email = Console.ReadLine();
+			while (!validator.isValidEmail(email))
+			{
+				Console.WriteLine("Write email of the person");
+				email = Console.ReadLine();
+                if (!validator.isValidEmail(email))
+                {
+                    Console.WriteLine("\nemail is of wrong format");
+                }
+            }
 
 			Contact newObj = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
 
@@ -83,13 +141,20 @@
 			}
 			else
 			{
-				Console.WriteLine($"Contact with firstName {firstName} not Found");
+				Console.WriteLine($"Contact with firstName {firstName} not Found\n");
 			}
 		}
 
 		public void update(string firstName)
 		{
 			Console.Clear();
+
+			//check whether the person with firstName available or not 
+			if (!data.dict.ContainsKey(firstName)){
+				Console.WriteLine("The Name does not exist\n");
+				return;
+			}
+
 			Contact contact = data.dict[firstName];
 			int flag = 1;
 			while (flag==1)
@@ -164,10 +229,61 @@
             }
             else
             {
-                Console.WriteLine($"Contact with firstName {firstName} is not there");
+                Console.WriteLine($"Contact with firstName {firstName} is not there\n");
+            }
+        }
+		public void searchByCity(string cityName)
+		{
+			Console.Clear();
+			bool found = true;
+
+			foreach(var contact in data.dict.Values)
+			{
+				if (contact.City.Equals(cityName, StringComparison.OrdinalIgnoreCase))
+				{
+                    Console.WriteLine($"First Name: {contact.FirstName}");
+                    Console.WriteLine($"Last Name: {contact.LastName}");
+                    Console.WriteLine($"Address: {contact.Address}");
+                    Console.WriteLine($"City: {contact.City}");
+                    Console.WriteLine($"State: {contact.State}");
+                    Console.WriteLine($"Pincode: {contact.Pincode}");
+                    Console.WriteLine($"Phone Number: {contact.PhoneNumber}");
+                    Console.WriteLine($"Email: {contact.Email}\n");
+
+					found = true;
+                }
+                if (!found)
+                {
+                    Console.WriteLine($"No contacts found in the state '{cityName}'.");
+                }
+            }
+		}
+        public void searchByState(string stateName)
+        {
+            Console.Clear();
+            bool found = false;
+
+            foreach (var contact in data.dict.Values)
+            {
+                if (contact.State.Equals(stateName, StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine($"First Name: {contact.FirstName}");
+                    Console.WriteLine($"Last Name: {contact.LastName}");
+                    Console.WriteLine($"Address: {contact.Address}");
+                    Console.WriteLine($"City: {contact.City}");
+                    Console.WriteLine($"State: {contact.State}");
+                    Console.WriteLine($"Pincode: {contact.Pincode}");
+                    Console.WriteLine($"Phone Number: {contact.PhoneNumber}");
+                    Console.WriteLine($"Email: {contact.Email}\n");
+
+                    found = true;
+                }
+            }
+
+            if (!found)
+            {
+                Console.WriteLine($"No contacts found in the state '{stateName}'.");
             }
         }
     }
 }
-
-
