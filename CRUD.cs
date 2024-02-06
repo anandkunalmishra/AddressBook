@@ -236,9 +236,10 @@ namespace Address_Book
 		{
 			Console.Clear();
 			bool found = true;
-
+			int counter = 0;
 			foreach(var contact in data.dict.Values)
 			{
+				counter++;
 				if (contact.City.Equals(cityName, StringComparison.OrdinalIgnoreCase))
 				{
                     Console.WriteLine($"First Name: {contact.FirstName}");
@@ -257,14 +258,17 @@ namespace Address_Book
                     Console.WriteLine($"No contacts found in the state '{cityName}'.");
                 }
             }
+
+			Console.WriteLine($"Total Contacts Found = {counter}");
 		}
         public void searchByState(string stateName)
         {
             Console.Clear();
             bool found = false;
-
+			int counter = 0;
             foreach (var contact in data.dict.Values)
             {
+				counter++;
                 if (contact.State.Equals(stateName, StringComparison.OrdinalIgnoreCase))
                 {
                     Console.WriteLine($"First Name: {contact.FirstName}");
@@ -284,6 +288,7 @@ namespace Address_Book
             {
                 Console.WriteLine($"No contacts found in the state '{stateName}'.");
             }
+			Console.WriteLine($"Total Contacts Found = {counter}");
         }
     }
 }
