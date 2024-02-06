@@ -4,14 +4,14 @@ namespace Address_Book
 {
 	public class CRUD
 	{
-		private string firstName ="";
-		private string lastName = "";
-		private string address = "";
-		private string city = "";
-		private string state = "";
-		private string zip = "";
-		private string phoneNumber = "";
-		private string email = "";
+		private string firstName="";
+		private string lastName="";
+		private string address="";
+		private string city="";
+		private string state="";
+		private string zip="";
+		private string phoneNumber="";
+		private string email="";
 
 		Database data = new Database();
 
@@ -23,26 +23,31 @@ namespace Address_Book
 			Console.WriteLine("Hello this is Add window ...");
 
 			//Taking first name of the contact from the user
-			int flag = 1;
-			while (!validator.isValidName(firstName) && flag == 1)
+			while (!validator.isValidName(firstName))
 			{
 				Console.WriteLine("Write First Name");
 				firstName = Console.ReadLine();
-				if (!validator.isValidName(firstName))
+                if (data.dict.ContainsKey(firstName))
+                {
+                    Console.WriteLine("User Already exist please enter Again");
+					firstName = "";
+					Console.WriteLine("Press Enter to do again");
+					Console.ReadLine();
+					Console.Clear();
+					create();
+                    return;
+                }
+                if (!validator.isValidName(firstName))
 				{
 					Console.WriteLine("\nEnter name only where first letter should be in Capital and Enter only Letters");
 				}
+				//checking for the unique name if the name already exists or what
+				if (data.dict.ContainsKey(firstName))
+				{
+					Console.WriteLine("User Already exist please enter Again");
+					break;
+				}
 			}
-			//checking for the unique name if the name already exists or what
-			if (data.dict.ContainsKey(firstName))
-			{
-				Console.WriteLine("User Already exist please enter Again");
-			}
-			else
-			{
-				flag = 0;
-			}
-
 			//Taking last name of contact from the user.
 			while (!validator.isValidName(lastName))
 			{
@@ -114,12 +119,21 @@ namespace Address_Book
             }
 
 			Contact newObj = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
-
-
 			data.dict.Add(newObj.FirstName, newObj);
 
+			firstName = "";
+			lastName = "";
+			address = "";
+			city = "";
+			state = "";
+			zip = "";
+			phoneNumber = "";
+			email = "";
 			Console.Clear();
 			Console.WriteLine("Contact successfully saved");
+			Console.WriteLine("Press Enter to Exit");
+			Console.ReadLine();
+			Console.Clear();
 		}
 
 
@@ -143,6 +157,8 @@ namespace Address_Book
 			{
 				Console.WriteLine($"Contact with firstName {firstName} not Found\n");
 			}
+			Console.WriteLine("Press Enter to Exit");
+			Console.ReadLine();
 		}
 
 		public void update(string firstName)
@@ -235,11 +251,11 @@ namespace Address_Book
 		public void searchByCity(string cityName)
 		{
 			Console.Clear();
-			bool found = true;
+			bool found = false;
 			int counter = 0;
+
 			foreach(var contact in data.dict.Values)
 			{
-				counter++;
 				if (contact.City.Equals(cityName, StringComparison.OrdinalIgnoreCase))
 				{
                     Console.WriteLine($"First Name: {contact.FirstName}");
@@ -252,23 +268,29 @@ namespace Address_Book
                     Console.WriteLine($"Email: {contact.Email}\n");
 
 					found = true;
+                    counter++;
                 }
                 if (!found)
                 {
-                    Console.WriteLine($"No contacts found in the state '{cityName}'.");
+                    Console.WriteLine($"No contacts found for city'{cityName}'.");
+                    Console.WriteLine("Press Enter to Exit");
+                    Console.ReadLine();
+					break;
                 }
             }
 
 			Console.WriteLine($"Total Contacts Found = {counter}");
+			Console.WriteLine("Press Enter to Exit");
+			Console.ReadLine();
 		}
         public void searchByState(string stateName)
         {
             Console.Clear();
             bool found = false;
-			int counter = 0;
+            int counter = 0;
+
             foreach (var contact in data.dict.Values)
             {
-				counter++;
                 if (contact.State.Equals(stateName, StringComparison.OrdinalIgnoreCase))
                 {
                     Console.WriteLine($"First Name: {contact.FirstName}");
@@ -281,19 +303,23 @@ namespace Address_Book
                     Console.WriteLine($"Email: {contact.Email}\n");
 
                     found = true;
+                    counter++;
+                }
+                if (!found)
+                {
+					Console.WriteLine($"No contacts found for state'{stateName}'.");
                 }
             }
 
-            if (!found)
-            {
-                Console.WriteLine($"No contacts found in the state '{stateName}'.");
-            }
-			Console.WriteLine($"Total Contacts Found = {counter}");
+            Console.WriteLine($"Total Contacts Found = {counter}");
+            Console.WriteLine("Press Enter to Exit");
+            Console.ReadLine();
         }
 		public void Display()
 		{
 			int counter = 1;
-			foreach(var item in data.dict)
+            var sortedDictionary = data.dict.OrderBy(x => x.Key);
+            foreach (var item in sortedDictionary)
 			{
 				Console.WriteLine($"[{counter++}]");
 				Console.WriteLine($" \tFirstName: {item.Value.FirstName}");
@@ -305,6 +331,13 @@ namespace Address_Book
                 Console.WriteLine($" \tPhoneNumber: {item.Value.PhoneNumber}");
                 Console.WriteLine($" \tEmail: {item.Value.Email}");
             }
+			if (counter == 1)
+			{
+				Console.WriteLine("AddressBook is Empty");
+			}
+			Console.WriteLine("Press Enter to Exit");
+			Console.ReadLine();
+			Console.Clear();
 		}
     }
 }

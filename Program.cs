@@ -6,11 +6,13 @@ namespace Address_Book
 
         public static void Main(string[] args)
         {
+            
             Database addressBook = new Database();
 
             int flag = 1;
             while (flag == 1)
             {
+                Console.Clear();
                 Console.WriteLine("Chosse an operation");
                 Console.WriteLine("1. Adding a contact");
                 Console.WriteLine("2. Reading a contact");
@@ -104,14 +106,14 @@ namespace Address_Book
         {
             Console.Clear();
             int choice;
+            Console.WriteLine("Choose which option you want");
+            Console.WriteLine("1. State");
+            Console.WriteLine("2. City");
             if(!int.TryParse(Console.ReadLine(),out choice))
             {
                 Console.WriteLine("Only Number to be entered");
                 return;
             }
-            Console.WriteLine("Choose which option you want");
-            Console.WriteLine("1. State");
-            Console.WriteLine("2. City");
 
             switch (choice)
             {
