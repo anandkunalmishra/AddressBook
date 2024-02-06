@@ -290,5 +290,21 @@ namespace Address_Book
             }
 			Console.WriteLine($"Total Contacts Found = {counter}");
         }
+		public void Display()
+		{
+			int counter = 1;
+			foreach(var item in data.dict)
+			{
+				Console.WriteLine($"[{counter++}]");
+				Console.WriteLine($" \tFirstName: {item.Value.FirstName}");
+                Console.WriteLine($" \tLastName:  {item.Value.LastName}");
+                Console.WriteLine($" \tAddress:  {item.Value.Address}");
+                Console.WriteLine($" \tCity:  {item.Value.City}");
+                Console.WriteLine($" \tState: {item.Value.State}");
+                Console.WriteLine($" \tPincode: {item.Value.Pincode}"); 
+                Console.WriteLine($" \tPhoneNumber: {item.Value.PhoneNumber}");
+                Console.WriteLine($" \tEmail: {item.Value.Email}");
+            }
+		}
     }
 }

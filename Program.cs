@@ -17,7 +17,8 @@ namespace Address_Book
                 Console.WriteLine("3. Delete a contact");
                 Console.WriteLine("4. Update a contact");
                 Console.WriteLine("5. Search a contact");
-                Console.WriteLine("6. Exit");
+                Console.WriteLine("6. Display all contact");
+                Console.WriteLine("7. Exit");
 
                 int choice;
 
@@ -57,6 +58,9 @@ namespace Address_Book
                         SearchByStateorCity(addressBook);
                         break;
                     case 6:
+                        displayContact(addressBook);
+                        break;
+                    case 7:
                         flag = 0;
                         break;
                     default:
@@ -125,6 +129,11 @@ namespace Address_Book
                     Console.WriteLine("Invalid Choice! Choose only for 1 and 2");
                     break;
             }
+        }
+        static void displayContact(Database addressbook)
+        {
+            Console.Clear();
+            operation.Display();
         }
     }
 }
