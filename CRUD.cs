@@ -254,29 +254,26 @@ namespace Address_Book
 			bool found = false;
 			int counter = 0;
 
-			foreach(var contact in data.dict.Values)
+			foreach (var contact in data.dict.Values)
 			{
-				if (contact.City.Equals(cityName, StringComparison.OrdinalIgnoreCase))
-				{
-                    Console.WriteLine($"First Name: {contact.FirstName}");
-                    Console.WriteLine($"Last Name: {contact.LastName}");
-                    Console.WriteLine($"Address: {contact.Address}");
-                    Console.WriteLine($"City: {contact.City}");
-                    Console.WriteLine($"State: {contact.State}");
-                    Console.WriteLine($"Pincode: {contact.Pincode}");
-                    Console.WriteLine($"Phone Number: {contact.PhoneNumber}");
-                    Console.WriteLine($"Email: {contact.Email}\n");
+				Console.WriteLine($"First Name: {contact.FirstName}");
+				Console.WriteLine($"Last Name: {contact.LastName}");
+				Console.WriteLine($"Address: {contact.Address}");
+				Console.WriteLine($"City: {contact.City}");
+				Console.WriteLine($"State: {contact.State}");
+				Console.WriteLine($"Pincode: {contact.Pincode}");
+				Console.WriteLine($"Phone Number: {contact.PhoneNumber}");
+				Console.WriteLine($"Email: {contact.Email}\n");
 
-					found = true;
-                    counter++;
-                }
-                if (!found)
-                {
-                    Console.WriteLine($"No contacts found for city'{cityName}'.");
-                    Console.WriteLine("Press Enter to Exit");
-                    Console.ReadLine();
-					break;
-                }
+				found = true;
+				counter++;
+			}
+
+            if (!found)
+            {
+                Console.WriteLine($"No contacts found for city'{cityName}'.");
+                Console.WriteLine("Press Enter to Exit");
+                Console.ReadLine();
             }
 
 			Console.WriteLine($"Total Contacts Found = {counter}");
@@ -289,6 +286,7 @@ namespace Address_Book
             bool found = false;
             int counter = 0;
 
+			
             foreach (var contact in data.dict.Values)
             {
                 if (contact.State.Equals(stateName, StringComparison.OrdinalIgnoreCase))
@@ -318,26 +316,77 @@ namespace Address_Book
 		public void Display()
 		{
 			int counter = 1;
-            var sortedDictionary = data.dict.OrderBy(x => x.Key);
-            foreach (var item in sortedDictionary)
-			{
-				Console.WriteLine($"[{counter++}]");
-				Console.WriteLine($" \tFirstName: {item.Value.FirstName}");
-                Console.WriteLine($" \tLastName:  {item.Value.LastName}");
-                Console.WriteLine($" \tAddress:  {item.Value.Address}");
-                Console.WriteLine($" \tCity:  {item.Value.City}");
-                Console.WriteLine($" \tState: {item.Value.State}");
-                Console.WriteLine($" \tPincode: {item.Value.Pincode}"); 
-                Console.WriteLine($" \tPhoneNumber: {item.Value.PhoneNumber}");
-                Console.WriteLine($" \tEmail: {item.Value.Email}");
+			int choice;
+
+            Console.WriteLine("1. Print after sorting FirstName");
+            Console.WriteLine("2. Print after sorting cityName");
+            Console.WriteLine("3. Print after sorting stateName");
+
+            if (!int.TryParse(Console.ReadLine(), out choice))
+            {
+                Console.WriteLine("Invalid choice. Please enter a number.");
             }
-			if (counter == 1)
+			switch (choice)
 			{
-				Console.WriteLine("AddressBook is Empty");
+				case 1:
+                    var sortedDictionary = data.dict.OrderBy(x => x.Key);
+                    foreach (var item in sortedDictionary)
+                    {
+                        Console.WriteLine($"[{counter++}]");
+                        Console.WriteLine($" \tFirstName: {item.Value.FirstName}");
+                        Console.WriteLine($" \tLastName:  {item.Value.LastName}");
+                        Console.WriteLine($" \tAddress:  {item.Value.Address}");
+                        Console.WriteLine($" \tCity:  {item.Value.City}");
+                        Console.WriteLine($" \tState: {item.Value.State}");
+                        Console.WriteLine($" \tPincode: {item.Value.Pincode}");
+                        Console.WriteLine($" \tPhoneNumber: {item.Value.PhoneNumber}");
+                        Console.WriteLine($" \tEmail: {item.Value.Email}");
+                    }
+                    break;
+				case 2:
+                    sortedDictionary = data.dict.OrderBy(x => x.Value.City);
+                    foreach (var item in sortedDictionary)
+                    {
+                        Console.WriteLine($"[{counter++}]");
+                        Console.WriteLine($" \tFirstName: {item.Value.FirstName}");
+                        Console.WriteLine($" \tLastName:  {item.Value.LastName}");
+                        Console.WriteLine($" \tAddress:  {item.Value.Address}");
+                        Console.WriteLine($" \tCity:  {item.Value.City}");
+                        Console.WriteLine($" \tState: {item.Value.State}");
+                        Console.WriteLine($" \tPincode: {item.Value.Pincode}");
+                        Console.WriteLine($" \tPhoneNumber: {item.Value.PhoneNumber}");
+                        Console.WriteLine($" \tEmail: {item.Value.Email}");
+                    }
+                    break;
+
+				case 3:
+					sortedDictionary = data.dict.OrderBy(x => x.Value.State);
+                    foreach (var item in sortedDictionary)
+                    {
+                        Console.WriteLine($"[{counter++}]");
+                        Console.WriteLine($" \tFirstName: {item.Value.FirstName}");
+                        Console.WriteLine($" \tLastName:  {item.Value.LastName}");
+                        Console.WriteLine($" \tAddress:  {item.Value.Address}");
+                        Console.WriteLine($" \tCity:  {item.Value.City}");
+                        Console.WriteLine($" \tState: {item.Value.State}");
+                        Console.WriteLine($" \tPincode: {item.Value.Pincode}");
+                        Console.WriteLine($" \tPhoneNumber: {item.Value.PhoneNumber}");
+                        Console.WriteLine($" \tEmail: {item.Value.Email}");
+                    }
+                    break;
+
+				default:
+					Console.WriteLine("Invalid Choice choose(1-3)");
+					break;
 			}
-			Console.WriteLine("Press Enter to Exit");
-			Console.ReadLine();
-			Console.Clear();
-		}
+            if (counter == 1)
+            {
+                Console.WriteLine("AddressBook is Empty");
+            }
+            Console.WriteLine("Press Enter to Exit");
+            Console.ReadLine();
+            Console.Clear();
+
+        }
     }
 }
