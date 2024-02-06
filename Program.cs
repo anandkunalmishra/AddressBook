@@ -6,16 +6,21 @@ namespace Address_Book
 
         public static void Main(string[] args)
         {
+            
             Database addressBook = new Database();
 
-            while (true)
+            int flag = 1;
+            while (flag == 1)
             {
+                Console.Clear();
                 Console.WriteLine("Chosse an operation");
                 Console.WriteLine("1. Adding a contact");
                 Console.WriteLine("2. Reading a contact");
                 Console.WriteLine("3. Delete a contact");
                 Console.WriteLine("4. Update a contact");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("5. Search a contact");
+                Console.WriteLine("6. Display all contact");
+                Console.WriteLine("7. Exit");
 
                 int choice;
 
@@ -52,9 +57,15 @@ namespace Address_Book
                         UpdateContact(addressBook);
                         break;
                     case 5:
-                        Environment.Exit(0);
+                        SearchByStateorCity(addressBook);
                         break;
                     case 6:
+                        displayContact(addressBook);
+                        break;
+                    case 7:
+                        flag = 0;
+                        break;
+                    default:
                         Console.WriteLine("Invalid choice! Please enter number between 1 and 5");
                         break;
                 }
@@ -84,12 +95,47 @@ namespace Address_Book
             operation.update(firstName);
         }
 
-        static void DeleteContact(Database addressbok)
+        static void DeleteContact(Database addressbook)
         {
             Console.Clear();
             Console.WriteLine("\nWrite the firstName");
             string firstName = Console.ReadLine();
             operation.delete(firstName);
+        }
+        static void SearchByStateorCity(Database addressbook)
+        {
+            Console.Clear();
+            int choice;
+            Console.WriteLine("Choose which option you want");
+            Console.WriteLine("1. State");
+            Console.WriteLine("2. City");
+            if(!int.TryParse(Console.ReadLine(),out choice))
+            {
+                Console.WriteLine("Only Number to be entered");
+                return;
+            }
+
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine("Enter the stateName for which you want to search for");
+                    string stateName = Console.ReadLine();
+                    operation.searchByState(stateName);
+                    break;
+                case 2:
+                    Console.WriteLine("Enter the cityName for which you want to search for");
+                    string cityName = Console.ReadLine();
+                    operation.searchByCity(cityName);
+                    break;
+                default:
+                    Console.WriteLine("Invalid Choice! Choose only for 1 and 2");
+                    break;
+            }
+        }
+        static void displayContact(Database addressbook)
+        {
+            Console.Clear();
+            operation.Display();
         }
     }
 }

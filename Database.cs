@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-namespace Address_Book
+﻿namespace Address_Book
 {
 	public class Database
 	{
@@ -13,3 +11,4 @@ namespace Address_Book
 	}
 }
 
+	

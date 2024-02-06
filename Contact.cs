@@ -2,14 +2,14 @@
 {
     public class Contact
     {
-        private string firstName;
-        private string lastName;
-        private string address;
-        private string city;
-        private string state;
-        private string zip;
-        private string phoneNumber;
-        private string email;
+        private string firstName="";
+        private string lastName="";
+        private string address="";
+        private string city="";
+        private string state="";
+        private string zip="";
+        private string phoneNumber="";
+        private string email="";
 
         public Contact(string firstName, string lastName, string address, string city, string state, string zip, string phoneNumber, string email)
         {
