@@ -76,7 +76,24 @@ namespace Address_Book
 
         static void AddContact(Database addressbook)
         {
-            operation.create();
+            Console.Clear();
+            Console.WriteLine("How do you want to Add");
+            Console.WriteLine("1. Add using console");
+            Console.WriteLine("2. Add using File");
+            int option;
+            if (!int.TryParse(Console.ReadLine(), out option))
+            {
+                Console.WriteLine("Invalid choice. Please enter a number.");
+            }
+            switch (option)
+            {
+                case 1:
+                    operation.create();
+                    break;
+                case 2:
+                    operation.ReadFile();
+                    break;
+            }
         }
 
         static void RetrieveContact(Database addressbook)
@@ -135,7 +152,26 @@ namespace Address_Book
         static void displayContact(Database addressbook)
         {
             Console.Clear();
-            operation.Display();
+            int option;
+
+            Console.WriteLine("Where to Display");
+            Console.WriteLine("1. Using Console");
+            Console.WriteLine("2. Using File ");
+
+            if (!int.TryParse(Console.ReadLine(), out option))
+            {
+                Console.WriteLine("Invalid choice. Please enter a number.");
+            }
+
+            switch (option)
+            {
+                case 1:
+                    operation.Display();
+                    break;
+                case 2:
+                    operation.writeFile();
+                    break;
+            }
         }
     }
 }
